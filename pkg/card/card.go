@@ -12,40 +12,82 @@ const (
 )
 
 type Card interface {
-	Name() string
-	ManaCost() int
-	TypeOfCard() typeOfCard
-	SetName(name string)
-	SetManaCost(manaCost int)
-	SetTypeOfCard(typeOfCard typeOfCard)
 }
 
-type BaseOfCard struct {
+//----------------------------------------------------------------------------------------------------------------
+
+type baseOfCard struct {
 	name       string     //name of card
 	manaCost   int        // mana cost of card
 	typeOfCard typeOfCard // what type card is
 }
 
-func (card BaseOfCard) Name() string {
+func (card baseOfCard) Name() string {
 	return card.name
 }
 
-func (card BaseOfCard) ManaCost() string {
-	return card.name
+func (card baseOfCard) ManaCost() int {
+	return card.manaCost
 }
 
-func (card BaseOfCard) TypeOfCard() string {
-	return card.name
+func (card baseOfCard) TypeOfCard() typeOfCard {
+	return card.typeOfCard
 }
 
-func (card *BaseOfCard) SetName(name string) {
+func (card *baseOfCard) SetName(name string) {
 	card.name = name
 }
 
-func (card *BaseOfCard) SetManaCost(manaCost int) {
+func (card *baseOfCard) SetManaCost(manaCost int) {
 	card.manaCost = manaCost
 }
 
-func (card *BaseOfCard) SetTypeOfCard(typeOfCard typeOfCard) {
+func (card *baseOfCard) SetTypeOfCard(typeOfCard typeOfCard) {
 	card.typeOfCard = typeOfCard
+}
+
+//----------------------------------------------------------------------------------------------------------------
+
+type combatCard struct {
+	baseOfCard
+	hp     int
+	attack int
+}
+
+func (card combatCard) Hp() int {
+	return card.hp
+}
+
+func (card combatCard) Attack() int {
+	return card.attack
+}
+
+//----------------------------------------------------------------------------------------------------------------
+
+type spellCard struct {
+	baseOfCard
+	value int
+}
+
+func (card spellCard) Value() int {
+	return card.value
+}
+
+func (card *spellCard) SetValue(value int) {
+	card.value = value
+}
+
+//----------------------------------------------------------------------------------------------------------------
+
+type heroBuffCard struct {
+	baseOfCard
+	value int
+}
+
+func (card *heroBuffCard) Value() int {
+	return card.value
+}
+
+func (card *heroBuffCard) SetValue(value int) {
+	card.value = value
 }
